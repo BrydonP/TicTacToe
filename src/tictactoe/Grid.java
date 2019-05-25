@@ -23,19 +23,36 @@ public class Grid{
     }
 
     public void printBoard(){
+        System.out.println();
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
-                System.out.print(grid[i][j] + " ");
-                //System.out.printf("d% ", grid[i][j]);
+                if(grid[i][j] == null){
+                    if(j < 2){
+                        System.out.print("    |");
+                    }else{
+                        System.out.print("    ");
+                    }
+                }else{
+                    if(j < 2){
+                        System.out.printf(" %s |", grid[i][j]);
+                    }else{
+                        System.out.printf(" %s ", grid[i][j]);
+                    }
+                }
             }
-            System.out.println();
+            System.out.println(); //New Line
+            if(i < 2){
+                System.out.println("--------------");
+            }
         }
+        System.out.println();
     }
 
     public int checkForWinner(){
-        //-1 = Winner
-        //1 = ... Won
-        //2 = ... Won
+        //-1 = No Winner
+        //-2 = Draw
+        //1 = X Won
+        //0 = O Won
         int result = -1;
         GamePiece vertical = checkVertical();
         GamePiece horizontal = checkHorizontal();
@@ -78,6 +95,18 @@ public class Grid{
             return grid[0][2];
         }
         return null;
+    }
+
+    private boolean checkDraw(){
+        boolean check = false;
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j < grid[i].length; j++){
+                if(grid[i][j] == GamePiece.Xs || grid[i][j] == GamePiece.Os){
+                    check = true;
+                    return check;
+                }
+            }
+        }
     }
 
 }

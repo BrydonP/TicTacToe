@@ -44,7 +44,7 @@ public class TicTacToe{
                     System.out.println("There is already a piece there! Choose again!");
                     grid.printBoard();
                 }else{
-                    placed = true; //Piece succesfully placed
+                    placed = true; //Piece succesfully placedss
                 }
             }
             grid.printBoard(); //Print board
