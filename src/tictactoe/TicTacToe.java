@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Brydon
+ * @author Brydon 2nd PC commit
  */
 public class TicTacToe{
 
