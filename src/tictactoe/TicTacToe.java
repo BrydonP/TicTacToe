@@ -17,7 +17,7 @@ public class TicTacToe{
         int posX;
         int posY;
         boolean gameOver = false;
-        int turn = 1; //1 = X's, 0 = O's
+        GamePiece turn = GamePiece.Xs; //1 = X's, 0 = O's
         Scanner userInput = new Scanner(System.in);
         boolean placed = false;
         String move;
@@ -48,11 +48,11 @@ public class TicTacToe{
                 }
             }
             grid.printBoard(); //Print board
-            if(turn == 1){//Swap Player
-                turn = 0;
+            if(turn == GamePiece.Xs){//Swap Player
+                turn = GamePiece.Os;
                 System.out.println("It's O's Turn!");
             }else{
-                turn = 1;
+                turn = GamePiece.Xs;
                 System.out.println("It's X's Turn!");
             }
             if(checkWinner(grid) != -1){
