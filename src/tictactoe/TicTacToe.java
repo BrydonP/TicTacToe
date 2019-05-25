@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Brydon 2nd PC commit
+ * @author Brydon 2nd PC commit start enum
  */
 public class TicTacToe{
 

@@ -1,6 +1,7 @@
 package tictactoe;
 
 /**
+ * start enum
  *
  * @author Brydon
  */

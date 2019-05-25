@@ -1,4 +1,5 @@
 package tictactoe;
+//start enum
 
 public class Grid{
 
@@ -25,6 +26,7 @@ public class Grid{
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
                 System.out.print(grid[i][j] + " ");
+                //System.out.printf("d% ", grid[i][j]);
             }
             System.out.println();
         }
@@ -41,10 +43,10 @@ public class Grid{
 
         if(vertical == 1 || horizontal == 1 || diaganol == 1){
             result = 1;
-            return result; // ... Won
+            return result; // X's Won
         }else if(vertical == 0 || horizontal == 0 || diaganol == 0){
             result = 0;
-            return result; // ... Won
+            return result; // O's Won
         }else{
             return result; // No Winner
         }
