@@ -1,5 +1,6 @@
 package tictactoe;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -17,6 +18,9 @@ public class TicTacToe{
         int posY;
         boolean gameOver = false;
         int turn = 1; //1 = X's, 0 = O's
+        Scanner userInput = new Scanner(System.in);
+        boolean placed = false;
+        String move;
 
         //Intro
         System.out.println("Welcome to TicTacToe!");
@@ -24,28 +28,35 @@ public class TicTacToe{
                 + "ie top left is 0,0, bottom right is 2,2");
         System.out.println("X's go first!");
 
-        Scanner userInput = new Scanner(System.in);
-
         while(gameOver == false){
             System.out.print("Enter you grid: ");
-            String move = userInput.next();
+            placed = false;
+            while(placed == false){
+                move = userInput.next();
 
-            //Seperate
-            posX = (int) move.charAt(0);
-            posY = (int) move.charAt(2);
+                //Seperate
+                posX = Character.getNumericValue(move.charAt(0));
+                posY = Character.getNumericValue(move.charAt(2));
 
-            //Try toi place peice, repeat piece is placed already
-            boolean placed = false;
-            while(placed = false){
-                if(grid.setPiece(posX, posY, turn) == false){
+                //Try to place peice, repeat if piece is placed already
+                placed = grid.setPiece(posX, posY, turn);
+                if(placed == false){
                     System.out.println("There is already a piece there! Choose again!");
+                    grid.printBoard();
                 }else{
                     placed = true; //Piece succesfully placed
                 }
             }
             grid.printBoard(); //Print board
+            if(turn == 1){//Swap Player
+                turn = 0;
+                System.out.println("It's O's Turn!");
+            }else{
+                turn = 1;
+                System.out.println("It's X's Turn!");
+            }
             if(checkWinner(grid) != -1){
-
+                gameOver = true;
             }
         }
     }
