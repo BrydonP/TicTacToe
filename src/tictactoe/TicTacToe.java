@@ -48,15 +48,16 @@ public class TicTacToe{
                 }
             }
             grid.printBoard(); //Print board
-            if(turn == GamePiece.Xs){//Swap Player
-                turn = GamePiece.Os;
-                System.out.println("It's O's Turn!");
-            }else{
-                turn = GamePiece.Xs;
-                System.out.println("It's X's Turn!");
-            }
             if(checkWinner(grid) != -1){
                 gameOver = true;
+            }else{
+                if(turn == GamePiece.Xs){//Swap Player
+                    turn = GamePiece.Os;
+                    System.out.println("It's O's Turn!");
+                }else{
+                    turn = GamePiece.Xs;
+                    System.out.println("It's X's Turn!");
+                }
             }
         }
     }
