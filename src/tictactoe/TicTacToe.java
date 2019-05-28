@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Brydon 2nd PC commit
+ * @author Brydon 2nd PC commit start enum
  */
 public class TicTacToe{
 
@@ -17,7 +17,7 @@ public class TicTacToe{
         int posX;
         int posY;
         boolean gameOver = false;
-        int turn = 1; //1 = X's, 0 = O's
+        GamePiece turn = GamePiece.Xs; //1 = X's, 0 = O's
         Scanner userInput = new Scanner(System.in);
         boolean placed = false;
         String move;
@@ -44,15 +44,15 @@ public class TicTacToe{
                     System.out.println("There is already a piece there! Choose again!");
                     grid.printBoard();
                 }else{
-                    placed = true; //Piece succesfully placed
+                    placed = true; //Piece succesfully placedss
                 }
             }
             grid.printBoard(); //Print board
-            if(turn == 1){//Swap Player
-                turn = 0;
+            if(turn == GamePiece.Xs){//Swap Player
+                turn = GamePiece.Os;
                 System.out.println("It's O's Turn!");
             }else{
-                turn = 1;
+                turn = GamePiece.Xs;
                 System.out.println("It's X's Turn!");
             }
             if(checkWinner(grid) != -1){
@@ -68,6 +68,8 @@ public class TicTacToe{
             System.out.println("X has Won!");
         }else if(winner == 0){
             System.out.println("O has Won!");
+        }else if(winner == -2){
+            System.out.println("Game is a Draw!!");
         }
         return winner;
     }

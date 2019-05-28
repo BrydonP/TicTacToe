@@ -1,20 +1,21 @@
 package tictactoe;
+//start enum
 
 public class Grid{
 
-    private int[][] grid = new int[3][3];
+    private GamePiece[][] grid = new GamePiece[3][3];
 
     public Grid(){
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
-                grid[i][j] = -1; // -1 is an empty space
+                grid[i][j] = null; // null is an empty space
             }
         }
     }
 
-    public boolean setPiece(int posX, int posY, int piece){
+    public boolean setPiece(int posX, int posY, GamePiece piece){
         boolean isSet = false;
-        if(grid[posY][posX] == -1){
+        if(grid[posY][posX] == null){
             grid[posY][posX] = piece;
             isSet = true;
         }
@@ -22,60 +23,98 @@ public class Grid{
     }
 
     public void printBoard(){
+        System.out.println();
+        System.out.println("  0   1    2");
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
-                System.out.print(grid[i][j] + " ");
+                if(grid[i][j] == null){
+                    if(j < 2){
+                        System.out.print("    |");
+                    }else{
+                        System.out.print("    ");
+                    }
+                }else{
+                    if(j < 2){
+                        System.out.printf(" %s |", grid[i][j]);
+                    }else{
+                        System.out.printf(" %s ", grid[i][j]);
+                    }
+                }
             }
-            System.out.println();
+            System.out.println(" " + i); //New Line
+            if(i < 2){
+                System.out.println("--------------");
+            }
         }
+        System.out.println();
     }
 
     public int checkForWinner(){
-        //-1 = Winner
-        //1 = ... Won
-        //2 = ... Won
+        //-1 = No Winner
+        //-2 = Draw
+        //1 = X Won
+        //0 = O Won
         int result = -1;
-        int vertical = checkVertical();
-        int horizontal = checkHorizontal();
-        int diaganol = checkDiaganol();
+        GamePiece vertical = checkVertical();
+        GamePiece horizontal = checkHorizontal();
+        GamePiece diaganol = checkDiaganol();
 
-        if(vertical == 1 || horizontal == 1 || diaganol == 1){
+        if(vertical == GamePiece.Xs || horizontal == GamePiece.Xs || diaganol == GamePiece.Xs){
             result = 1;
-            return result; // ... Won
-        }else if(vertical == 0 || horizontal == 0 || diaganol == 0){
+            return result; // X's Won
+        }else if(vertical == GamePiece.Os || horizontal == GamePiece.Os || diaganol == GamePiece.Os){
             result = 0;
-            return result; // ... Won
+            return result; // O's Won
+        }else if(checkDraw() == true){
+            result = -2;
+            return result;
         }else{
             return result; // No Winner
         }
     }
 
-    private int checkVertical(){
+    private GamePiece checkVertical(){
         for(int i = 0; i < grid.length; i++){
             if((grid[0][i] == grid[1][i]) && (grid[0][i] == grid[2][i])){
                 return grid[0][i];
             }
         }
-        return -1;
+        return null;
     }
 
-    private int checkHorizontal(){
+    private GamePiece checkHorizontal(){
         for(int i = 0; i < grid.length; i++){
             if((grid[i][0] == grid[i][1]) && (grid[i][0] == grid[i][2])){
                 return grid[i][0];
             }
         }
-        return -1;
+        return null;
     }
 
-    private int checkDiaganol(){
+    private GamePiece checkDiaganol(){
         if((grid[0][0] == grid[1][1]) && (grid[0][0] == grid[2][2])){
             return grid[0][0];
         }
         if((grid[0][2] == grid[1][1]) && (grid[0][2] == grid[2][0])){
             return grid[0][2];
         }
-        return -1;
+        return null;
+    }
+
+    private boolean checkDraw(){
+        int counter = 0;
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j < grid[i].length; j++){
+                if(grid[i][j] != null){
+                    counter++;
+                }
+            }
+        }
+        if(counter == 9){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
