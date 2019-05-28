@@ -68,6 +68,8 @@ public class TicTacToe{
             System.out.println("X has Won!");
         }else if(winner == 0){
             System.out.println("O has Won!");
+        }else if(winner == -2){
+            System.out.println("Game is a Draw!!");
         }
         return winner;
     }

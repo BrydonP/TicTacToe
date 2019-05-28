@@ -24,6 +24,7 @@ public class Grid{
 
     public void printBoard(){
         System.out.println();
+        System.out.println("  0   1    2");
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
                 if(grid[i][j] == null){
@@ -40,7 +41,7 @@ public class Grid{
                     }
                 }
             }
-            System.out.println(); //New Line
+            System.out.println(" " + i); //New Line
             if(i < 2){
                 System.out.println("--------------");
             }
@@ -64,6 +65,9 @@ public class Grid{
         }else if(vertical == GamePiece.Os || horizontal == GamePiece.Os || diaganol == GamePiece.Os){
             result = 0;
             return result; // O's Won
+        }else if(checkDraw() == true){
+            result = -2;
+            return result;
         }else{
             return result; // No Winner
         }
@@ -98,14 +102,18 @@ public class Grid{
     }
 
     private boolean checkDraw(){
-        boolean check = false;
+        int counter = 0;
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
-                if(grid[i][j] == GamePiece.Xs || grid[i][j] == GamePiece.Os){
-                    check = true;
-                    return check;
+                if(grid[i][j] != null){
+                    counter++;
                 }
             }
+        }
+        if(counter == 9){
+            return true;
+        }else{
+            return false;
         }
     }
 
